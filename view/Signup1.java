@@ -4,18 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import com.toedter.calendar.*;
+import java.awt.event.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-public class Signup1 extends JFrame {
+public class Signup1 extends JFrame implements ActionListener {
 
     JLabel lbltitle, lblsubtitle, lblname, lblfathersname, lbldob, lblgender,
             lblemail, lblmart, lbladdress, lblcity, lblstate, lblpin;
     JTextField txtname, txtfathersname, txtemail, txtaddress,
             txtcity, txtstate, txtpin;
     JDateChooser dateChooser;
-    JRadioButton btnmale, btnfemale, btngother, btnmarried,btnunmarried,btnmsother;
-    ButtonGroup genderGroup,martstatGroup;
+    JRadioButton btnmale, btnfemale, btngother, btnmarried, btnunmarried, btnmsother;
+    ButtonGroup genderGroup, martstatGroup;
     JButton btnnext;
-
+    int num;
     Font ftitle = new Font("Marker Felt", Font.BOLD, 38);
 
     Signup1() {
@@ -26,7 +29,7 @@ public class Signup1 extends JFrame {
 
         // Generate random number
         Random ran = new Random();
-        int num = Math.abs(ran.nextInt(10000));
+        num = Math.abs(ran.nextInt(10000));
 
         lbltitle = new JLabel("Application Form No. " + num);
         lbltitle.setFont(ftitle);
@@ -54,6 +57,7 @@ public class Signup1 extends JFrame {
         dateChooser = new JDateChooser();
         dateChooser.setBounds(300, 240, 300, 30);
         dateChooser.setForeground(new Color(125, 125, 125));
+        dateChooser.setDateFormatString("yyyy-MM-dd");
 
         lblgender = new JLabel("Gender:");
         lblgender.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -61,19 +65,18 @@ public class Signup1 extends JFrame {
 
         btnmale = new JRadioButton("Male");
         btnmale.setBounds(300, 290, 100, 30);
-        btnmale.setBackground(new Color(255,255,255));
+        btnmale.setBackground(new Color(255, 255, 255));
         btnfemale = new JRadioButton("Female");
         btnfemale.setBounds(400, 290, 100, 30);
-        btnfemale.setBackground(new Color(255,255,255));
+        btnfemale.setBackground(new Color(255, 255, 255));
         btngother = new JRadioButton("Others");
         btngother.setBounds(500, 290, 100, 30);
-        btngother.setBackground(new Color(255,255,255));
+        btngother.setBackground(new Color(255, 255, 255));
 
-        genderGroup= new ButtonGroup();
+        genderGroup = new ButtonGroup();
         genderGroup.add(btnmale);
         genderGroup.add(btnfemale);
         genderGroup.add(btngother);
-
 
         lblemail = new JLabel("Email:");
         lblemail.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -87,15 +90,15 @@ public class Signup1 extends JFrame {
 
         btnmarried = new JRadioButton("Married");
         btnmarried.setBounds(300, 390, 100, 30);
-        btnmarried.setBackground(new Color(255,255,255));
+        btnmarried.setBackground(new Color(255, 255, 255));
         btnunmarried = new JRadioButton("Unmarried");
         btnunmarried.setBounds(400, 390, 100, 30);
-        btnunmarried.setBackground(new Color(255,255,255));
+        btnunmarried.setBackground(new Color(255, 255, 255));
         btnmsother = new JRadioButton("Others");
         btnmsother.setBounds(500, 390, 100, 30);
-        btnmsother.setBackground(new Color(255,255,255));
+        btnmsother.setBackground(new Color(255, 255, 255));
 
-        martstatGroup= new ButtonGroup();
+        martstatGroup = new ButtonGroup();
         martstatGroup.add(btnmarried);
         martstatGroup.add(btnunmarried);
         martstatGroup.add(btnmsother);
@@ -124,11 +127,11 @@ public class Signup1 extends JFrame {
         txtpin = new JTextField();
         txtpin.setBounds(300, 590, 300, 30);
 
-        btnnext =new JButton("Next");
+        btnnext = new JButton("Next");
         btnnext.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnnext.setBackground(Color.BLACK);
         btnnext.setForeground(Color.CYAN);
-        btnnext.setBounds(620,660,100,30);
+        btnnext.setBounds(620, 660, 100, 30);
 
         add(lbltitle);
         add(lblsubtitle);
@@ -166,5 +169,25 @@ public class Signup1 extends JFrame {
 
     public static void main(String[] args) {
         new Signup1();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String formno = Integer.toString(num);
+        String name = txtname.getText();
+        String father_name = txtfathersname.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getToolTipText();
+
+        Date dateofbirth;
+        try {
+            dateofbirth = new SimpleDateFormat().parse(dob);
+            dateChooser.setDate(dateofbirth);
+
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+        }
+        if(e.getSource()==btnnext){
+            System.out.println(dateChooser);
+        }
     }
 }

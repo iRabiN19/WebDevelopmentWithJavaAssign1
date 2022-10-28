@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "libraries/jcalendar-1.4.jar"
+        "c:\\Users\\Lenovo\\Documents\\Sem4\\Java\\Libraries\\jcalendar-1.4.jar",
+        "c:\\Users\\Lenovo\\Documents\\Sem4\\Java\\Libraries\\mysql-connector-java-8.0.30.jar"
     ]
 }
