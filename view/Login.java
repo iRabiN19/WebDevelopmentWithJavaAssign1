@@ -43,19 +43,19 @@ public class Login extends JFrame implements ActionListener {
 
         btnlogin = new JButton("Login");
         btnlogin.setBounds(300, 250, 110, 25);
-        btnlogin.setFont(new Font("Raleway", Font.BOLD, 20));
+        btnlogin.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnlogin.setBackground(Color.BLACK);
         btnlogin.setForeground(Color.CYAN);
 
         btnreg = new JButton("Sign Up");
         btnreg.setBounds(360, 290, 110, 25);
-        btnreg.setFont(new Font("Raleway", Font.BOLD, 20));
+        btnreg.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnreg.setBackground(Color.BLACK);
         btnreg.setForeground(Color.CYAN);
 
         btnclear = new JButton("Clear");
         btnclear.setBounds(430, 250, 110, 25);
-        btnclear.setFont(new Font("Raleway", Font.BOLD, 20));
+        btnclear.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnclear.setBackground(Color.BLACK);
         btnclear.setForeground(Color.CYAN);
 
