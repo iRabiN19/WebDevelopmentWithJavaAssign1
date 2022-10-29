@@ -31,31 +31,31 @@ public class Login extends JFrame implements ActionListener {
         lblacc.setFont(new Font("Raleway", Font.BOLD, 23));
         lblacc.setBounds(120, 150, 300, 40);
         txtacc = new JTextField();
-        txtacc.setFont(new Font("Arial", Font.BOLD,16));
+        txtacc.setFont(new Font("Arial", Font.BOLD, 16));
         txtacc.setBounds(340, 150, 270, 30);
 
         lblpw = new JLabel("Password:");
         lblpw.setFont(new Font("Raleway", Font.BOLD, 23));
         lblpw.setBounds(120, 200, 300, 40);
         txtpw = new JPasswordField();
-        txtpw.setFont(new Font("Arial", Font.BOLD,16));
+        txtpw.setFont(new Font("Arial", Font.BOLD, 16));
         txtpw.setBounds(340, 200, 270, 30);
 
         btnlogin = new JButton("Login");
         btnlogin.setBounds(300, 250, 110, 25);
-        btnlogin.setFont(new Font("Monospaced", Font.BOLD, 20));
+        btnlogin.setFont(new Font("Monospaced", Font.BOLD, 30));
         btnlogin.setBackground(Color.BLACK);
         btnlogin.setForeground(Color.CYAN);
 
         btnreg = new JButton("Sign Up");
         btnreg.setBounds(360, 290, 110, 25);
-        btnreg.setFont(new Font("Monospaced", Font.BOLD, 20));
+        btnreg.setFont(new Font("Monospaced", Font.BOLD, 30));
         btnreg.setBackground(Color.BLACK);
         btnreg.setForeground(Color.CYAN);
 
         btnclear = new JButton("Clear");
         btnclear.setBounds(430, 250, 110, 25);
-        btnclear.setFont(new Font("Monospaced", Font.BOLD, 20));
+        btnclear.setFont(new Font("Monospaced", Font.BOLD, 30));
         btnclear.setBackground(Color.BLACK);
         btnclear.setForeground(Color.CYAN);
 
@@ -80,8 +80,6 @@ public class Login extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
- 
-
     public static void main(String[] args) {
         new Login();
     }
@@ -92,11 +90,13 @@ public class Login extends JFrame implements ActionListener {
             txtacc.setText("");
             txtpw.setText("");
         } else if (e.getSource() == btnreg) {
+            setVisible(false);
+            new SignUpView().setVisible(true);
 
         } else if (e.getSource() == btnlogin) {
 
         }
-        
+
     }
 
 }

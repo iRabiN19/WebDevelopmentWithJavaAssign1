@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import com.toedter.calendar.*;
+
+import controller.SignUpController;
+import model.SignUp;
 import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Signup1 extends JFrame implements ActionListener {
+public class SignUpView extends JFrame implements ActionListener {
 
     JLabel lbltitle, lblsubtitle, lblname, lblfathersname, lbldob, lblgender,
             lblemail, lblmart, lbladdress, lblcity, lblstate, lblpin;
@@ -18,18 +21,19 @@ public class Signup1 extends JFrame implements ActionListener {
     JRadioButton btnmale, btnfemale, btngother, btnmarried, btnunmarried, btnmsother;
     ButtonGroup genderGroup, martstatGroup;
     JButton btnnext;
-    int num;
+    Random ran = new Random();
+    int  num = Math.abs(ran.nextInt(10000));
+    
     Font ftitle = new Font("Marker Felt", Font.BOLD, 38);
 
-    Signup1() {
+    SignUpView() {
         setSize(850, 800);
         setLayout(null);
 
         getContentPane().setBackground(Color.WHITE);
 
         // Generate random number
-        Random ran = new Random();
-        num = Math.abs(ran.nextInt(10000));
+        
 
         lbltitle = new JLabel("Application Form No. " + num);
         lbltitle.setFont(ftitle);
@@ -84,7 +88,7 @@ public class Signup1 extends JFrame implements ActionListener {
         txtemail = new JTextField();
         txtemail.setBounds(300, 340, 300, 30);
 
-        lblmart = new JLabel("Martial Status:");
+        lblmart = new JLabel("marital Status:");
         lblmart.setFont(new Font("Raleway", Font.BOLD, 20));
         lblmart.setBounds(100, 390, 200, 30);
 
@@ -132,6 +136,7 @@ public class Signup1 extends JFrame implements ActionListener {
         btnnext.setBackground(Color.BLACK);
         btnnext.setForeground(Color.CYAN);
         btnnext.setBounds(620, 660, 100, 30);
+        btnnext.addActionListener(this);
 
         add(lbltitle);
         add(lblsubtitle);
@@ -168,26 +173,88 @@ public class Signup1 extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Signup1();
+
+        new SignUpView();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String formno = Integer.toString(num);
+    public void actionPerformed(ActionEvent ae) {
+        int formno = num;
         String name = txtname.getText();
         String father_name = txtfathersname.getText();
-        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getToolTipText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
 
-        Date dateofbirth;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+        Date dateofbirth=new Date(2001-07-26);
         try {
-            dateofbirth = new SimpleDateFormat().parse(dob);
-            dateChooser.setDate(dateofbirth);
-
-        } catch (ParseException e1) {
+            dateofbirth = formatter.parse(dob);
+        } 
+        catch (ParseException e1) {
             e1.printStackTrace();
         }
-        if(e.getSource()==btnnext){
-            System.out.println(dateChooser);
+            
+        String gender = "other";
+        if (btnmale.isSelected()) {
+            gender = "Male";
+        } else if (btnfemale.isSelected()) {
+            gender = "Female";
+        } else if (btngother.isSelected()) {
+            gender = "Other";
+        }
+
+        String email = txtemail.getText();
+        String marital_status = "married";
+        if (btnmarried.isSelected()) {
+            marital_status = "Married";
+        } else if (btnunmarried.isSelected()) {
+            marital_status = "Unmarried";
+        } else if (btnmsother.isSelected()) {
+            marital_status = "Other";
+        }
+
+        String address = txtaddress.getText();
+        String city = txtcity.getText();
+        String state = txtstate.getText();
+        String pin = txtpin.getText();
+
+        try {
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your name.");
+            } else if (father_name.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your father's name.");
+            } else if (dob.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your date of birth.");
+            } else if (gender.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please select your gender.");
+            } else if (email.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your email.");
+            } else if (marital_status.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please select your marital status.");
+            } else if (address.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your address.");
+            } else if (city.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your city.");
+            } else if (state.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your state.");
+            } else if (pin.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your pin.");
+            } else {
+                SignUp signUp = new SignUp(formno, name, father_name, dateofbirth, gender, email, marital_status,
+                        address, city, state, pin);
+
+                SignUpController singcont = new SignUpController();
+                int insert = singcont.registerCustomer(signUp);
+
+                if (insert > 0) {
+                    System.out.println("Customer added successfully");
+                } else {
+                    System.out.println("Error registering customer");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
