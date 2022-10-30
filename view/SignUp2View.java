@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.SignUp2Controller;
+import model.SignUp2;
+
 public class SignUp2View extends JFrame implements ActionListener {
 
    
@@ -185,35 +188,43 @@ public class SignUp2View extends JFrame implements ActionListener {
         String religion = (String)combReligion.getSelectedItem(); 
         String phone=txtphone.getText();
         String income = (String)combIncome.getSelectedItem();
-        String education = (String)combEdu.getSelectedItem();
+        String qualification = (String)combEdu.getSelectedItem();
         String occupation = (String)combOcc.getSelectedItem();
         
         String pan = txtpan.getText();     
         String citizenship=txtcitizen.getText();   
-        String scitizen = "";
+        String seniorc = "";
         if(rbtnSCyes.isSelected()){ 
-            scitizen = "Yes";
+            seniorc = "Yes";
         }
         else if(rbtnSCno.isSelected()){ 
-            scitizen = "No";
+            seniorc = "No";
         }
            
-        String eaccount = "";
+        String existing = "";
         if(rbtnEAyes.isSelected()){ 
-            eaccount = "Yes";
+            existing = "Yes";
         }else if(rbtnEAno.isSelected()){ 
-            eaccount = "No";
+            existing = "No";
         }
         
         try{
             if(txtpan.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Fill all the required fields");
             }else{
-                // DBConnection c1 = new DBConnection();
-                // String q1 = "insert into SignUp2View values('"+formno+"','"+religion+"','"+income+"','"+education+"','"+occupation+"','"+pan+"','"+scitizen+"','"+eaccount+"')";
-                // c1..executeUpdate(q1);
+                SignUp2 signUp2 = new SignUp2(formno,religion, phone,  income, qualification,  occupation,  pan,  citizenship,
+                 seniorc,  existing);
+
+        SignUp2Controller sign2cont = new SignUp2Controller();
+        int insert = sign2cont.registerCustomer(signUp2);
+
+        if (insert > 0) {
+            System.out.println("Customer added successfully");
+        } else {
+            System.out.println("Error registering customer");
+        }
                 
-               // new Signup3View(formno).setVisible(true);
+                new SignUp3View(formno).setVisible(true);
                 setVisible(false);
             }
                 
