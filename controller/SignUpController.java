@@ -9,7 +9,7 @@ public class SignUpController {
 
     public int registerCustomer(SignUp signUp) {
         String query;
-        query = "insert into signup values('" +
+        query = "insert into signup(formno, name, father_name, dob, gender, email, marital_status, address, city, state, pincode) values('" +
                 signUp.getFormno() + "','" +
                 signUp.getName() + "','" +
                 signUp.getFather_name() + "','" +
@@ -20,7 +20,7 @@ public class SignUpController {
                 signUp.getAddress() + "','" +
                 signUp.getCity() + "','" +
                 signUp.getState() + "','" +
-                signUp.getPincode() + "','";
+                signUp.getPincode() + "');";
         db = new DBConnection();
         return db.insert(query);
     }

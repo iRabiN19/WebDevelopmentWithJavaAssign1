@@ -26,6 +26,7 @@ public class DBConnection {
             //             "Error connecting Database");
             // }
 
+            st = con.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,6 +40,15 @@ public class DBConnection {
         }
 
         return val;
+    }
+    public ResultSet select(String query) {
+        try {
+            rows = st.executeQuery(query);
+            // con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rows;
     }
 
     // public static void main(String[] args) {
