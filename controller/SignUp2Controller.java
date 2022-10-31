@@ -8,7 +8,7 @@ public class SignUp2Controller {
 
     public int registerCustomer(SignUp2 signUp2) {
         String query;
-        query = "insert into signup(formno,religion,phone,income,qualification,occupation,pan,citizenship,seniorc,existing) values('" +
+        query = "insert into signup2(formno,religion,phone,income,qualification,occupation,pan,citizenship,seniorc,existing) values('" +
                 signUp2.getFormno() + "','" +
                 signUp2.getReligion() + "','" +
                 signUp2.getPhone() + "','" +

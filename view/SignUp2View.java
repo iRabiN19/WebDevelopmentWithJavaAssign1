@@ -93,9 +93,9 @@ public class SignUp2View extends JFrame implements ActionListener {
         lblform.setBounds(700,10,120,30);
                 
         btnnext = new JButton("Next");
-        btnnext.setFont(new Font("Raleway", Font.BOLD, 14));
+        btnnext.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnnext.setBackground(Color.BLACK);
-        btnnext.setForeground(Color.WHITE);
+        btnnext.setForeground(Color.CYAN);
         btnnext.setBounds(570,640,100,30);
         
         
@@ -212,7 +212,7 @@ public class SignUp2View extends JFrame implements ActionListener {
             if(txtpan.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Fill all the required fields");
             }else{
-                SignUp2 signUp2 = new SignUp2(formno,religion, phone,  income, qualification,  occupation,  pan,  citizenship,
+                SignUp2 signUp2 = new SignUp2(formno, religion, phone,  income, qualification,  occupation,  pan,  citizenship,
                  seniorc,  existing);
 
         SignUp2Controller sign2cont = new SignUp2Controller();
@@ -220,12 +220,14 @@ public class SignUp2View extends JFrame implements ActionListener {
 
         if (insert > 0) {
             System.out.println("Customer added successfully");
+
+            new SignUp3View(formno).setVisible(true);
+        setVisible(false); 
         } else {
             System.out.println("Error registering customer");
         }
-                
-                new SignUp3View(formno).setVisible(true);
-                setVisible(false);
+        
+               
             }
                 
       
