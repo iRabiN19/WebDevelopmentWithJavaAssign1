@@ -15,9 +15,9 @@ import java.text.SimpleDateFormat;
 public class SignUpView extends JFrame implements ActionListener {
 
     JLabel lbltitle, lblsubtitle, lblname, lblfathersname, lbldob, lblgender,
-            lblemail, lblmart, lbladdress, lblcity, lblstate, lblpin;
+            lblemail, lblmart, lbladdress, lblcity, lblstate;
     JTextField txtname, txtfathersname, txtemail, txtaddress,
-            txtcity, txtstate, txtpin;
+            txtcity, txtstate;
     JDateChooser dateChooser;
     JRadioButton btnmale, btnfemale, btngother, btnmarried, btnunmarried, btnmsother;
     ButtonGroup genderGroup, martstatGroup;
@@ -125,11 +125,7 @@ public class SignUpView extends JFrame implements ActionListener {
         txtstate = new JTextField();
         txtstate.setBounds(300, 540, 300, 30);
 
-        lblpin = new JLabel("Pin Code:");
-        lblpin.setFont(new Font("Raleway", Font.BOLD, 20));
-        lblpin.setBounds(100, 590, 200, 30);
-        txtpin = new JTextField();
-        txtpin.setBounds(300, 590, 300, 30);
+        
 
         btnnext = new JButton("Next");
         btnnext.setFont(new Font("Monospaced", Font.BOLD, 20));
@@ -149,14 +145,12 @@ public class SignUpView extends JFrame implements ActionListener {
         add(lblmart);
         add(lblname);
         add(lblstate);
-        add(lblpin);
         add(txtaddress);
         add(txtcity);
         add(txtemail);
         add(txtfathersname);
         add(txtname);
         add(txtstate);
-        add(txtpin);
         add(dateChooser);
         add(btnmale);
         add(btnfemale);
@@ -220,7 +214,6 @@ public class SignUpView extends JFrame implements ActionListener {
         String address = txtaddress.getText();
         String city = txtcity.getText();
         String state = txtstate.getText();
-        String pincode = txtpin.getText();
 
         if(ae.getSource()==btnnext){
             try {
@@ -238,11 +231,9 @@ public class SignUpView extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Please fill your city.");
                 } else if (state.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please fill your state.");
-                } else if (pincode.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Please fill your pin.");
                 } else {
                     SignUp signUp = new SignUp(formno, name, father_name, dob, gender, email, marital_status,
-                            address, city, state, pincode);
+                            address, city, state);
     
                     SignUpController singcont = new SignUpController();
                     int insert = singcont.registerCustomer(signUp);

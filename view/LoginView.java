@@ -1,17 +1,21 @@
 package view;
 
 import javax.swing.*;
+
+import controller.SignUp3Controller;
+import model.SignUp3;
+
 import java.awt.*;
 import java.awt.event.*;
 
-public class Login extends JFrame implements ActionListener {
+public class LoginView extends JFrame implements ActionListener {
 
     JLabel label, lblwlc, lblacc, lblpw;
     JTextField txtacc;
     JPasswordField txtpw;
     JButton btnlogin, btnreg, btnclear;
 
-    Login() {
+    LoginView() {
 
         setTitle("Banking System");
         setLayout(null);
@@ -75,13 +79,14 @@ public class Login extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
 
-        setVisible(true);
         setLocation(350, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        
     }
 
     public static void main(String[] args) {
-        new Login();
+        new LoginView();
     }
 
     @Override
@@ -94,7 +99,17 @@ public class Login extends JFrame implements ActionListener {
             new SignUpView().setVisible(true);
 
         } else if (e.getSource() == btnlogin) {
-
+           String cardno=txtacc.getText();
+          String  password=String.valueOf(txtpw.getPassword());
+            SignUp3Controller controller = new SignUp3Controller();
+        SignUp3 customer = controller.loginCustomer(cardno, password);
+        if (customer != null) {
+            JOptionPane.showMessageDialog(null,"Login Successful!!");
+            setVisible(true);
+            new Transaction().setVisible(true);
+        } else {
+            System.out.println("Either username or password is incorrect");
+        }
         }
 
     }

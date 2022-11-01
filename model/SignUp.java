@@ -13,13 +13,12 @@ public class SignUp {
     private String address; 
     private String city; 
     private String state;
-    private String pincode;
 
 
     public SignUp(int formno, String name, String father_name,
         Date dob, String gender, String email,
         String marital_status, String address, 
-        String city, String state, String pincode){
+        String city, String state){
             this.formno=formno;
             this.name=name;
             this.father_name=father_name;
@@ -30,8 +29,6 @@ public class SignUp {
             this.address=address;
             this.city=city;
             this.state=state;
-            this.pincode=pincode;
-
     }
 
     public int getFormno() {
@@ -94,10 +91,5 @@ public class SignUp {
     public void setState(String state) {
         this.state = state;
     }
-    public String getPincode() {
-        return pincode;
-    }
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
+   
 }

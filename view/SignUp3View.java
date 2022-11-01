@@ -8,6 +8,9 @@ import java.util.Random;
 
 import javax.swing.*;
 
+import controller.SignUp3Controller;
+import model.SignUp3;
+
 public class SignUp3View extends JFrame implements ActionListener {
 
     JLabel lblform, lbltype, lblcard, lblcardno, lblcarddetails, lblappear,
@@ -199,6 +202,29 @@ public class SignUp3View extends JFrame implements ActionListener {
                 services = services + " E-Statement";
             }
 
+            try {
+                if (accountType.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Fill all the required fields");
+                } else {
+                    SignUp3 signUp3 = new SignUp3(formno,accountType,cardno,Pin,services);
+    
+                    SignUp3Controller sign3cont = new SignUp3Controller();
+                    int insert = sign3cont.registerCustomer(signUp3);
+    
+                    if (insert > 0) {
+                        System.out.println("Customer added successfully");
+    
+                        JOptionPane.showMessageDialog(null, "Your Card Number: " +cardno +
+                                                    "\n Your Pin: "+Pin);
+                    } else {
+                        System.out.println("Error registering customer");
+                    }
+    
+                }
+    
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         } else if (ae.getSource() == btncancel) {
 
         }
