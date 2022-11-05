@@ -54,7 +54,7 @@ public class Continue extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 if(e.getSource()==btnyes){
     setVisible(false);
-    new Transaction().setVisible(true);
+    new Transaction("","").setVisible(true);
 } else if(e.getSource()==btnno){
     setVisible(false);
     new LoginView().setVisible(true);

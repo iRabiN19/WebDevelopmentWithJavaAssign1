@@ -1,0 +1,99 @@
+package view;
+
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Withdrawl extends JFrame implements ActionListener {
+
+    JLabel lbltitle, lblimage;
+    JTextField txtamount;
+    JButton btnwithdraw, btnback;
+    static String cardno;
+    static String pin;
+
+    Withdrawl(String cardno, String pin) {
+        Withdrawl.pin = pin;
+        Withdrawl.cardno = cardno;
+
+        setSize(1360, 906);
+        setLocation(350, 95);
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Icons/laptop.jpeg"));
+        Image i2 = i1.getImage().getScaledInstance(1360, 906, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        lblimage = new JLabel(i3);
+        lblimage.setBounds(0, 0, 1360, 906);
+        add(lblimage);
+
+        lbltitle = new JLabel("Please enter the amount: ");
+        lbltitle.setForeground(Color.BLACK);
+        lbltitle.setFont(new Font("System", Font.BOLD, 35));
+        lbltitle.setBounds(425, 150, 700, 35);
+
+        txtamount = new JTextField();
+        txtamount.setBounds(425, 200, 450, 55);
+        txtamount.setFont(new Font("Raleway", Font.BOLD, 50));
+
+        btnwithdraw = new JButton("Withdraw");
+        btnwithdraw.setBounds(830, 365, 180, 50);
+        btnwithdraw.setFont(new Font("Monospaced", Font.BOLD, 23));
+        btnwithdraw.setBackground(Color.BLACK);
+        btnwithdraw.setForeground(Color.CYAN);
+
+        btnback = new JButton("Back");
+        btnback.setBounds(830, 475, 180, 50);
+        btnback.setFont(new Font("Monospaced", Font.BOLD, 23));
+        btnback.setBackground(Color.BLACK);
+        btnback.setForeground(Color.CYAN);
+
+        lblimage.add(lbltitle);
+        lblimage.add(txtamount);
+        lblimage.add(btnwithdraw);
+        lblimage.add(btnback);
+
+        btnwithdraw.addActionListener(this);
+        btnback.addActionListener(this);
+
+        setLayout(null);
+        setUndecorated(true);
+        setVisible(true);
+
+    }
+
+    public static void main(String[] args) {
+        new Withdrawl(cardno, pin);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == btnwithdraw) {
+
+            String amount = txtamount.getText();
+
+            if (txtamount.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter the Amount to you want to Withdraw");
+            } else {
+
+                setVisible(false);
+                new PinVerification(cardno, pin, amount).setVisible(true);
+
+                // int insert = depositcont.registerCustomer(deposit);
+
+                // if (insert > 0) {
+                // System.out.println("Amount Deposited successfully!");
+                // JOptionPane.showMessageDialog(null, "Rs. " + amount + " Deposited
+                // Successfully");
+
+                // } else {
+                // System.out.println("Error depositing amount!");
+                // }
+            }
+        } else if (ae.getSource() == btnback) {
+            setVisible(false);
+            new Transaction("", "");
+        }
+
+    }
+}

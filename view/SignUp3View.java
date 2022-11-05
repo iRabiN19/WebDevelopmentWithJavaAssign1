@@ -206,27 +206,31 @@ public class SignUp3View extends JFrame implements ActionListener {
                 if (accountType.equals("")) {
                     JOptionPane.showMessageDialog(null, "Fill all the required fields");
                 } else {
-                    SignUp3 signUp3 = new SignUp3(formno,accountType,cardno,Pin,services);
-    
+                    SignUp3 signUp3 = new SignUp3(formno, accountType, cardno, Pin, services);
+
                     SignUp3Controller sign3cont = new SignUp3Controller();
                     int insert = sign3cont.registerCustomer(signUp3);
-    
+
                     if (insert > 0) {
                         System.out.println("Customer added successfully");
-    
-                        JOptionPane.showMessageDialog(null, "Your Card Number: " +cardno +
-                                                    "\n Your Pin: "+Pin);
+
+                        JOptionPane.showMessageDialog(null, "Your Card Number: " + cardno +
+                                "\n Your Pin: " + Pin);
+                        JOptionPane.showMessageDialog(null, "You are requested to deposit some amount into your account initially.");
+                            setVisible(false);
+                            new DepositView(cardno,Pin).setVisible(true);
                     } else {
                         System.out.println("Error registering customer");
                     }
-    
+
                 }
-    
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else if (ae.getSource() == btncancel) {
-
+            setVisible(false);
+            new LoginView().setVisible(true);
         }
     }
 }

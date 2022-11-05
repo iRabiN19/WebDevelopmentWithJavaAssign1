@@ -104,11 +104,10 @@ public class LoginView extends JFrame implements ActionListener {
             SignUp3Controller controller = new SignUp3Controller();
         SignUp3 customer = controller.loginCustomer(cardno, password);
         if (customer != null) {
-            JOptionPane.showMessageDialog(null,"Login Successful!!");
-            setVisible(true);
-            new Transaction().setVisible(true);
+            setVisible(false);
+            new Transaction(cardno,password).setVisible(true);
         } else {
-            System.out.println("Either username or password is incorrect");
+            JOptionPane.showMessageDialog(null,"Card number or password incorrect!!");
         }
         }
 
