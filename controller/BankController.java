@@ -24,7 +24,7 @@ public class BankController {
         return db.insert(query);
     }
 
-    public Bank transaction( String cardno, String amount) {
+    public double transaction( String cardno, String amount) {
         String query;
         query = "select * from bank where cardno = '" + cardno +"';";
         db = new DBConnection();
@@ -52,6 +52,6 @@ public class BankController {
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
-        return transact;
+        return balance;
     }
 }

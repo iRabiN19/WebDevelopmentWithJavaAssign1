@@ -12,18 +12,20 @@ import java.awt.event.*;
 import java.util.Date;
 
 public class PinVerification extends JFrame implements ActionListener {
-    JLabel lblcontinue;
+    JLabel lblinput;
     JPasswordField txtpin;
     JButton btnok, btnno;
-
+    int verify = 0;
     static String cardno;
     static String pin;
     static String amount;
+    static String mode;
 
-    PinVerification(String cardno, String pin, String amount) {
+    PinVerification(String cardno, String pin, String amount, String mode) {
         PinVerification.cardno = cardno;
         PinVerification.pin = pin;
         PinVerification.amount = amount;
+        PinVerification.mode = mode;
 
         setTitle("Menu Driven");
         setLayout(null);
@@ -32,10 +34,10 @@ public class PinVerification extends JFrame implements ActionListener {
         Color color = new Color(0, 127, 98);
         getContentPane().setBackground(color);
 
-        lblcontinue = new JLabel("Enter your pin:");
-        lblcontinue.setBounds(90, 40, 280, 40);
-        lblcontinue.setFont(new Font("Raleway", Font.BOLD, 30));
-        lblcontinue.setForeground(Color.BLACK);
+        lblinput = new JLabel("Enter your pin:");
+        lblinput.setBounds(90, 40, 280, 40);
+        lblinput.setFont(new Font("Raleway", Font.BOLD, 30));
+        lblinput.setForeground(Color.BLACK);
 
         txtpin = new JPasswordField("");
         txtpin.setBounds(60, 95, 280, 30);
@@ -47,7 +49,7 @@ public class PinVerification extends JFrame implements ActionListener {
         btnok.setBackground(Color.BLACK);
         btnok.setForeground(Color.CYAN);
 
-        add(lblcontinue);
+        add(lblinput);
         add(btnok);
         add(txtpin);
 
@@ -60,7 +62,7 @@ public class PinVerification extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new PinVerification(cardno, pin, amount);
+        new PinVerification(cardno, pin, amount, mode);
     }
 
     @Override
@@ -68,30 +70,37 @@ public class PinVerification extends JFrame implements ActionListener {
         if (e.getSource() == btnok) {
             Date d = new Date();
             String date = d.toString();
+
             String password = String.valueOf(txtpin.getPassword());
             SignUp3Controller controller = new SignUp3Controller();
             SignUp3 customer = controller.pinVerification(cardno, password);
+
             if (customer != null) {
+                if (mode == "withdraw") {
+                    System.out.println(mode);
+                    Bank deposit = new Bank(cardno, amount, "Withdraw", date);
+                    BankController depositcont = new BankController();
+                    double balance = depositcont.transaction(cardno, amount);
+                    if (balance !=0.0) {
+                        depositcont.balance(deposit);
+                        JOptionPane.showMessageDialog(null, "Rs. " + amount + " Debited Successfully");
+                        new Transaction(cardno, password).setVisible(true);
 
+                    }
+                } else if (mode == "pin") {
+                    new PinChange(cardno, pin);
+                    this.dispose();
+                }
 
-                Bank deposit = new Bank(cardno, amount, "Withdraw", date);
-                BankController depositcont = new BankController();
-               Bank bank= depositcont.transaction(cardno, amount);
-               if(bank!=null){
-                depositcont.balance(deposit);
-               }
-
-                JOptionPane.showMessageDialog(null, "Rs. " + amount + " Debited Successfully");
-
-                setVisible(false);
-
-                new Transaction(cardno, password).setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Incorrect Pin!!");
             }
-            setVisible(false);
-            new Transaction("", "").setVisible(true);
-        }
 
+            // setVisible(false);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect Pin!!");
+        }
+        // setVisible(false);
+        // new Transaction(cardno, pin).setVisible(true);
     }
+
 }

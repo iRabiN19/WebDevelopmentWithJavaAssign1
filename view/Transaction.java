@@ -93,10 +93,16 @@ public class Transaction extends JFrame implements ActionListener {
             new Continue().setVisible(true);
         } else if (ae.getSource() == btndeposit) {
             setVisible(false);
-            new DepositView(cardno,pin).setVisible(true);
+            new DepositView(cardno, pin).setVisible(true);
         } else if (ae.getSource() == btnwithdraw) {
             setVisible(false);
-            new Withdrawl(cardno,pin).setVisible(true);
+            new Withdrawl(cardno, pin).setVisible(true);
+        } else if (ae.getSource() == btnpin) {
+            new PinVerification(cardno, pin, "", "pin");
+            this.dispose();
+        }  else if (ae.getSource() == btnenquiry) {
+            new BalanceEnquiry(cardno, pin);
+            this.dispose();
         }
     }
 

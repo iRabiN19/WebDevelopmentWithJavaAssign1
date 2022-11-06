@@ -2,8 +2,12 @@ package view;
 
 import javax.swing.*;
 
+// import controller.BankController;
+// import model.Bank;
+
 import java.awt.*;
 import java.awt.event.*;
+// import java.util.Date;
 
 public class Withdrawl extends JFrame implements ActionListener {
 
@@ -76,19 +80,8 @@ public class Withdrawl extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter the Amount to you want to Withdraw");
             } else {
 
-                setVisible(false);
-                new PinVerification(cardno, pin, amount).setVisible(true);
+                new PinVerification(cardno, pin, amount, "withdraw");
 
-                // int insert = depositcont.registerCustomer(deposit);
-
-                // if (insert > 0) {
-                // System.out.println("Amount Deposited successfully!");
-                // JOptionPane.showMessageDialog(null, "Rs. " + amount + " Deposited
-                // Successfully");
-
-                // } else {
-                // System.out.println("Error depositing amount!");
-                // }
             }
         } else if (ae.getSource() == btnback) {
             setVisible(false);

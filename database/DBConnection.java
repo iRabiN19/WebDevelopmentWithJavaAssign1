@@ -41,6 +41,16 @@ public class DBConnection {
 
         return val;
     }
+
+    public int update(String query) {
+        try {
+            val = st.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return val;
+    }
     public ResultSet select(String query) {
         try {
             rows = st.executeQuery(query);

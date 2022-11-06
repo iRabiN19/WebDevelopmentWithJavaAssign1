@@ -20,7 +20,7 @@ public class SignUp3Controller {
         db = new DBConnection();
         return db.insert(query);
     }
-    
+
     public SignUp3 loginCustomer(String cardno, String pin) {
         String query;
         query = "select * from signup3 where cardno = '" + cardno +
@@ -59,12 +59,20 @@ public class SignUp3Controller {
                 customer.setPin(rs.getString("Pin"));
                 customer.setServices(rs.getString("services"));
 
-               
             }
-            
+
         } catch (Exception ex) {
             System.out.println("Error" + ex);
         }
         return customer;
+    }
+
+    public int changepin(String pin, String rpin) {
+        String query;
+
+        query = "update signup3 set pin = '"+rpin+"' where pin = '"+pin+"' ";
+
+        db = new DBConnection();
+        return db.insert(query);
     }
 }
