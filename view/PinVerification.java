@@ -3,9 +3,9 @@ package view;
 import javax.swing.*;
 
 import controller.BankController;
-import controller.SignUp3Controller;
+import controller.AccountDetailsController;
 import model.Bank;
-import model.SignUp3;
+import model.AccountDetails;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,14 +16,12 @@ public class PinVerification extends JFrame implements ActionListener {
     JPasswordField txtpin;
     JButton btnok, btnno;
     int verify = 0;
-    static String cardno;
-    static String pin;
+    static String username;
     static String amount;
     static String mode;
 
-    PinVerification(String cardno, String pin, String amount, String mode) {
-        PinVerification.cardno = cardno;
-        PinVerification.pin = pin;
+    PinVerification(String username, String amount, String mode) {
+        PinVerification.username = username;
         PinVerification.amount = amount;
         PinVerification.mode = mode;
 
@@ -62,7 +60,7 @@ public class PinVerification extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new PinVerification(cardno, pin, amount, mode);
+        new PinVerification(username, amount, mode);
     }
 
     @Override
@@ -71,36 +69,36 @@ public class PinVerification extends JFrame implements ActionListener {
             Date d = new Date();
             String date = d.toString();
 
-            String password = String.valueOf(txtpin.getPassword());
-            SignUp3Controller controller = new SignUp3Controller();
-            SignUp3 customer = controller.pinVerification(cardno, password);
+            String pin = String.valueOf(txtpin.getPassword());
+            AccountDetailsController controller = new AccountDetailsController();
+            AccountDetails customer = controller.pinVerification(username, pin);
 
             if (customer != null) {
                 if (mode == "withdraw") {
                     System.out.println(mode);
-                    Bank deposit = new Bank(cardno, amount, "Withdraw", date);
+                    Bank deposit = new Bank(username, "", amount, "Withdraw", date);
                     BankController depositcont = new BankController();
-                    double balance = depositcont.transaction(cardno, amount);
+                    double balance = depositcont.transaction(username, amount);
                     if (balance !=0.0) {
                         depositcont.balance(deposit);
                         JOptionPane.showMessageDialog(null, "Rs. " + amount + " Debited Successfully");
-                        new Transaction(cardno, password).setVisible(true);
+                        new Transaction(username);
+                        this.dispose();
 
                     }
                 } else if (mode == "pin") {
-                    new PinChange(cardno, pin);
+                    new PinChange(username,pin);
                     this.dispose();
                 }
 
             }
 
-            // setVisible(false);
+           
 
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Pin!!");
         }
-        // setVisible(false);
-        // new Transaction(cardno, pin).setVisible(true);
+      
     }
 
 }

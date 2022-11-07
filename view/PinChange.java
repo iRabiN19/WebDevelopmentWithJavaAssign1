@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 
-import controller.SignUp3Controller;
+import controller.AccountDetailsController;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,11 +11,11 @@ public class PinChange extends JFrame implements ActionListener {
     JLabel lblimage, lbltitle, lblnpin, lblrpin;
     JPasswordField txtnpin, txtrpin;
     JButton btnchangepin, btnback;
-    static String cardno;
+    static String username;
     static String pin;
 
-    PinChange(String cardno, String pin) {
-        PinChange.cardno = cardno;
+    PinChange(String username, String pin) {
+        PinChange.username = username;
         PinChange.pin = pin;
 
         setSize(1360, 906);
@@ -79,7 +79,7 @@ public class PinChange extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new PinChange(cardno, pin);
+        new PinChange(username, pin);
     }
 
     @Override
@@ -98,29 +98,22 @@ public class PinChange extends JFrame implements ActionListener {
                     return;
                 }
                 
-                SignUp3Controller controller = new SignUp3Controller();
+                AccountDetailsController controller = new AccountDetailsController();
                 int update = controller.changepin(pin,rpin);
 
                 if (update > 0) {
                     System.out.println("Pin changed successfully");
                     JOptionPane.showMessageDialog(null, "PIN changed successfully");
 
-                        new Transaction(cardno,rpin);
+                        new Transaction(username);
                         this.dispose();
                 } else {
                     System.out.println("Error changing pin.");
                 }
 
-                // Conn c1 = new Conn();
-                // String q1 = "update bank set pin = '"+rpin+"' where pin = '"+pin+"' ";
-                // String q2 = "update login set pin = '"+rpin+"' where pin = '"+pin+"' ";
-
-              
-
-               
 
         } else if(ae.getSource()==btnback){
-            new Transaction(cardno, pin);
+            new Transaction(username);
             this.dispose();
         }
     }

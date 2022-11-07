@@ -1,6 +1,6 @@
 package model;
 
-public class SignUp2 {
+public class CustomerADetails {
     private int formno;
     private String religion;
     private String phone;
@@ -12,7 +12,7 @@ public class SignUp2 {
     private String seniorc;
     private String existing;
 
-    public SignUp2(int formno, String religion, String phone, String income,
+    public CustomerADetails(int formno, String religion, String phone, String income,
             String qualification, String occupation, String pan, String citizenship,
             String seniorc, String existing) {
         this.formno = formno;

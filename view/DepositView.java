@@ -13,12 +13,12 @@ public class DepositView extends JFrame implements ActionListener {
     JLabel lbltitle, lblimage;
     JTextField txtamount;
     JButton btndeposit, btnback;
-    static String cardno;
-    static String pin;
+    static String username;
 
-    DepositView(String cardno, String pin) {
-        DepositView.pin = pin;
-        DepositView.cardno = cardno;
+    DepositView(String username) {
+        DepositView.username = username;
+
+
 
         setSize(1360, 906);
         setLocation(350, 95);
@@ -66,7 +66,7 @@ public class DepositView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new DepositView(cardno, pin);
+        new DepositView("");
     }
 
     @Override
@@ -81,7 +81,7 @@ public class DepositView extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter the Amount to you want to Deposit");
             } else {
 
-                Bank deposit = new Bank(cardno, amount, "Deposit", date);
+                Bank deposit = new Bank(username,"accno", amount, "Deposit", date);
 
                 BankController depositcont = new BankController();
                 int insert = depositcont.balance(deposit);
@@ -93,12 +93,12 @@ public class DepositView extends JFrame implements ActionListener {
                 } else {
                     System.out.println("Error depositing amount!");
                 }
-                setVisible(false);
-                new Transaction(cardno, pin).setVisible(true);
+                new Transaction(username);
+                this.dispose();
             }
         } else if (ae.getSource() == btnback) {
-            setVisible(false);
-            new Transaction("", "");
+            new Transaction("");
+            this.dispose();
         }
 
     }

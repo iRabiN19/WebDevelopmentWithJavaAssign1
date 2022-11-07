@@ -1,26 +1,30 @@
 package model;
 
-public class SignUp3 {
+public class AccountDetails {
     private int formno;
+    private String username;
+    private String password;
     private String accountType;
-    private String cardno;
+    private String accno;
     private String Pin;
     private String services;
 
-    public SignUp3(int formno,String accountType,String cardno, String Pin, String services){
+    public AccountDetails(int formno,String username, String password,String accountType,String accno, String Pin, String services){
         this.formno=formno;
+        this.username=username;
+        this.password=password;
         this.accountType=accountType;
-        this.cardno=cardno;
+        this.accno=accno;
         this.Pin=Pin;
         this.services=services;
     }
 
-    public SignUp3(String cardno, String Pin) {
-        this.cardno=cardno;
+    public AccountDetails(String username, String Pin) {
+        this.username=username;
         this.Pin=Pin;
     }
 
-    public SignUp3() {
+    public AccountDetails() {
     }
 
     public int getFormno()    
@@ -30,17 +34,30 @@ public class SignUp3 {
     public void setFormno(int formno) {
         this.formno = formno;
     }
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getAccountType() {
         return accountType;
     }
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
-    public String getCardno() {
-        return cardno;
+    public String getAccno() {
+        return accno;
     }
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
+    public void setAccno(String accno) {
+        this.accno = accno;
     }
     public String getPin() {
         return Pin;

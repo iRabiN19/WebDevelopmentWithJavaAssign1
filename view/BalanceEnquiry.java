@@ -2,17 +2,17 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 import controller.BankController;
 
-public class BalanceEnquiry extends JFrame {
+public class BalanceEnquiry extends JFrame implements ActionListener {
     JLabel lblimage, lbltitle, lblbalance;
-    static String cardno;
-    static String pin;
+    JButton btnback;
+    static String username;
 
-    BalanceEnquiry(String cardno, String pin) {
-        BalanceEnquiry.cardno = cardno;
-        BalanceEnquiry.pin = pin;
+    BalanceEnquiry(String username) {
+        BalanceEnquiry.username = username;
 
         setSize(1360, 906);
         setLocation(350, 95);
@@ -33,13 +33,22 @@ public class BalanceEnquiry extends JFrame {
         lblbalance.setFont(new Font("Raleway", Font.BOLD, 25));
         lblbalance.setBounds(425, 210, 400, 30);
 
+        btnback = new JButton("Back");
+        btnback.setBounds(830, 475, 180, 50);
+        btnback.setFont(new Font("Monospaced", Font.BOLD, 23));
+        btnback.setBackground(Color.BLACK);
+        btnback.setForeground(Color.CYAN);
+
         BankController controller = new BankController();
-        double balance = controller.transaction(cardno, pin);
+        double balance = controller.transaction(username, "");
 
         lblbalance.setText("Your balance is Rs." + balance);
 
         lblimage.add(lbltitle);
         lblimage.add(lblbalance);
+        lblimage.add(btnback);
+
+        btnback.addActionListener(this);
 
         setLayout(null);
         setUndecorated(true);
@@ -47,7 +56,13 @@ public class BalanceEnquiry extends JFrame {
     }
 
     public static void main(String[] args) {
-        new BalanceEnquiry(cardno, pin);
+        new BalanceEnquiry(username);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        new Transaction(username);
+        this.dispose();
     }
 
 }

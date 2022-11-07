@@ -7,8 +7,12 @@ import java.awt.event.*;
 public class Continue extends JFrame implements ActionListener {
     JLabel lblcontinue;
     JButton btnyes, btnno;
+    static String username;
 
-    Continue() {
+
+
+    Continue(String username) {
+        Continue.username=username;
         setTitle("Menu Driven");
         setLayout(null);
         setSize(400, 250);
@@ -47,14 +51,14 @@ public class Continue extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Continue();
+        new Continue(username);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 if(e.getSource()==btnyes){
     setVisible(false);
-    new Transaction("","").setVisible(true);
+    new Transaction("").setVisible(true);
 } else if(e.getSource()==btnno){
     setVisible(false);
     new LoginView().setVisible(true);

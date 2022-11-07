@@ -2,16 +2,18 @@ package view;
 
 import javax.swing.*;
 
-import controller.SignUp3Controller;
-import model.SignUp3;
+import controller.AccountDetailsController;
+// import database.DBConnection;
+import model.AccountDetails;
 
 import java.awt.*;
 import java.awt.event.*;
+// import java.sql.ResultSet;
 
 public class LoginView extends JFrame implements ActionListener {
 
-    JLabel label, lblwlc, lblacc, lblpw;
-    JTextField txtacc;
+    JLabel label, lblwlc, lblusername, lblpw;
+    JTextField txtusername;
     JPasswordField txtpw;
     JButton btnlogin, btnreg, btnclear;
 
@@ -31,12 +33,12 @@ public class LoginView extends JFrame implements ActionListener {
         lblwlc.setFont(new Font("Oswald", Font.BOLD, 30));
         lblwlc.setBounds(200, 40, 500, 40);
 
-        lblacc = new JLabel("Account Number:");
-        lblacc.setFont(new Font("Raleway", Font.BOLD, 23));
-        lblacc.setBounds(120, 150, 300, 40);
-        txtacc = new JTextField();
-        txtacc.setFont(new Font("Arial", Font.BOLD, 16));
-        txtacc.setBounds(340, 150, 270, 30);
+        lblusername = new JLabel("Username:");
+        lblusername.setFont(new Font("Raleway", Font.BOLD, 23));
+        lblusername.setBounds(120, 150, 300, 40);
+        txtusername = new JTextField();
+        txtusername.setFont(new Font("Arial", Font.BOLD, 16));
+        txtusername.setBounds(340, 150, 270, 30);
 
         lblpw = new JLabel("Password:");
         lblpw.setFont(new Font("Raleway", Font.BOLD, 23));
@@ -45,7 +47,7 @@ public class LoginView extends JFrame implements ActionListener {
         txtpw.setFont(new Font("Arial", Font.BOLD, 16));
         txtpw.setBounds(340, 200, 270, 30);
 
-        btnlogin = new JButton("Sign In");
+        btnlogin = new JButton("Log In");
         btnlogin.setBounds(300, 250, 150, 25);
         btnlogin.setFont(new Font("Monospaced", Font.BOLD, 23));
         btnlogin.setBackground(Color.BLACK);
@@ -69,20 +71,21 @@ public class LoginView extends JFrame implements ActionListener {
 
         add(label);
         add(lblwlc);
-        add(lblacc);
+        add(lblusername);
         add(lblpw);
-        add(txtacc);
+        add(txtusername);
         add(txtpw);
         add(btnlogin);
         add(btnreg);
         add(btnclear);
 
-        getContentPane().setBackground(Color.WHITE);
+        Color color = new Color(242, 202, 133);
+        getContentPane().setBackground(color);
 
-        setLocation(350, 200);
+        setLocation(500, 120);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        
+
     }
 
     public static void main(String[] args) {
@@ -92,23 +95,35 @@ public class LoginView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnclear) {
-            txtacc.setText("");
+            txtusername.setText("");
             txtpw.setText("");
         } else if (e.getSource() == btnreg) {
             setVisible(false);
-            new SignUpView().setVisible(true);
+            new CustomerPDetailsView().setVisible(true);
 
         } else if (e.getSource() == btnlogin) {
-           String cardno=txtacc.getText();
-          String  password=String.valueOf(txtpw.getPassword());
-            SignUp3Controller controller = new SignUp3Controller();
-        SignUp3 customer = controller.loginCustomer(cardno, password);
-        if (customer != null) {
-            setVisible(false);
-            new Transaction(cardno,password).setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,"Card number or password incorrect!!");
-        }
+            String username = txtusername.getText();
+            String password = String.valueOf(txtpw.getPassword());
+
+            if (username.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your username.");
+            } else if (password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill your password.");
+
+            } else {
+
+                AccountDetailsController controller = new AccountDetailsController();
+                AccountDetails customer = controller.loginCustomer(username, password);
+                if (customer != null) {
+
+                  
+
+                    new Transaction(username);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username or password incorrect!!");
+                }
+            }
         }
 
     }

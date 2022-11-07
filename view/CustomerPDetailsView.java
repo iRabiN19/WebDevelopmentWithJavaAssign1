@@ -5,14 +5,14 @@ import java.awt.*;
 import java.util.*;
 import com.toedter.calendar.*;
 
-import controller.SignUpController;
-import model.SignUp;
+import controller.CustomerPController;
+import model.CustomerPDetails;
 import java.awt.event.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class SignUpView extends JFrame implements ActionListener {
+public class CustomerPDetailsView extends JFrame implements ActionListener {
 
     JLabel lbltitle, lblsubtitle, lblname, lblfathersname, lbldob, lblgender,
             lblemail, lblmart, lbladdress, lblcity, lblstate;
@@ -27,13 +27,13 @@ public class SignUpView extends JFrame implements ActionListener {
 
     Font ftitle = new Font("Marker Felt", Font.BOLD, 38);
 
-    SignUpView() {
+    CustomerPDetailsView() {
         setSize(850, 800);
         setLayout(null);
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 1");
-        getContentPane().setBackground(Color.WHITE);
 
-        // Generate random number
+        Color color = new Color(242, 202, 133);
+        getContentPane().setBackground(color);
 
         lbltitle = new JLabel("Application Form No. " + num);
         lbltitle.setFont(ftitle);
@@ -48,12 +48,16 @@ public class SignUpView extends JFrame implements ActionListener {
         lblname.setBounds(100, 140, 200, 30);
         txtname = new JTextField();
         txtname.setBounds(300, 140, 300, 30);
+        txtname.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lblfathersname = new JLabel("Father's Name:");
         lblfathersname.setFont(new Font("Raleway", Font.BOLD, 20));
         lblfathersname.setBounds(100, 190, 200, 30);
         txtfathersname = new JTextField();
         txtfathersname.setBounds(300, 190, 300, 30);
+        txtfathersname.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lbldob = new JLabel("Date of Birth:");
         lbldob.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -62,6 +66,8 @@ public class SignUpView extends JFrame implements ActionListener {
         dateChooser.setBounds(300, 240, 300, 30);
         dateChooser.setForeground(new Color(125, 125, 125));
         dateChooser.setDateFormatString("yyyy-MM-dd");
+        dateChooser.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lblgender = new JLabel("Gender:");
         lblgender.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -69,13 +75,13 @@ public class SignUpView extends JFrame implements ActionListener {
 
         btnmale = new JRadioButton("Male");
         btnmale.setBounds(300, 290, 100, 30);
-        btnmale.setBackground(new Color(255, 255, 255));
+        btnmale.setBackground(color);
         btnfemale = new JRadioButton("Female");
         btnfemale.setBounds(400, 290, 100, 30);
-        btnfemale.setBackground(new Color(255, 255, 255));
+        btnfemale.setBackground(color);
         btngother = new JRadioButton("Others");
         btngother.setBounds(500, 290, 100, 30);
-        btngother.setBackground(new Color(255, 255, 255));
+        btngother.setBackground(color);
 
         genderGroup = new ButtonGroup();
         genderGroup.add(btnmale);
@@ -87,6 +93,8 @@ public class SignUpView extends JFrame implements ActionListener {
         lblemail.setBounds(100, 340, 200, 30);
         txtemail = new JTextField();
         txtemail.setBounds(300, 340, 300, 30);
+        txtemail.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lblmart = new JLabel("Marital Status:");
         lblmart.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -94,13 +102,13 @@ public class SignUpView extends JFrame implements ActionListener {
 
         btnmarried = new JRadioButton("Married");
         btnmarried.setBounds(300, 390, 100, 30);
-        btnmarried.setBackground(new Color(255, 255, 255));
+        btnmarried.setBackground(color);
         btnunmarried = new JRadioButton("Unmarried");
         btnunmarried.setBounds(400, 390, 100, 30);
-        btnunmarried.setBackground(new Color(255, 255, 255));
+        btnunmarried.setBackground(color);
         btnmsother = new JRadioButton("Others");
         btnmsother.setBounds(500, 390, 100, 30);
-        btnmsother.setBackground(new Color(255, 255, 255));
+        btnmsother.setBackground(color);
 
         martstatGroup = new ButtonGroup();
         martstatGroup.add(btnmarried);
@@ -112,18 +120,24 @@ public class SignUpView extends JFrame implements ActionListener {
         lbladdress.setBounds(100, 440, 200, 30);
         txtaddress = new JTextField();
         txtaddress.setBounds(300, 440, 300, 30);
+        txtaddress.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lblcity = new JLabel("City:");
         lblcity.setFont(new Font("Raleway", Font.BOLD, 20));
         lblcity.setBounds(100, 490, 200, 30);
         txtcity = new JTextField();
         txtcity.setBounds(300, 490, 300, 30);
+        txtcity.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         lblstate = new JLabel("State:");
         lblstate.setFont(new Font("Raleway", Font.BOLD, 20));
         lblstate.setBounds(100, 540, 200, 30);
         txtstate = new JTextField();
         txtstate.setBounds(300, 540, 300, 30);
+        txtstate.setFont(new Font("Raleway", Font.BOLD, 20));
+
 
         
 
@@ -161,7 +175,7 @@ public class SignUpView extends JFrame implements ActionListener {
         add(btnnext);
        
 
-        setLocation(350, 200);
+        setLocation(500, 120);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -169,7 +183,7 @@ public class SignUpView extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-        new SignUpView();
+        new CustomerPDetailsView();
     }
 
     @Override
@@ -232,10 +246,10 @@ public class SignUpView extends JFrame implements ActionListener {
                 } else if (state.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please fill your state.");
                 } else {
-                    SignUp signUp = new SignUp(formno, name, father_name, dob, gender, email, marital_status,
+                    CustomerPDetails signUp = new CustomerPDetails(formno, name, father_name, dob, gender, email, marital_status,
                             address, city, state);
     
-                    SignUpController singcont = new SignUpController();
+                    CustomerPController singcont = new CustomerPController();
                     int insert = singcont.registerCustomer(signUp);
     
                     if (insert > 0) {
@@ -246,7 +260,7 @@ public class SignUpView extends JFrame implements ActionListener {
 
                     setVisible(false);
 
-                    new SignUp2View(formno).setVisible(true);
+                    new CustomerADetailsView(formno).setVisible(true);
                 }
     
             } catch (Exception e) {

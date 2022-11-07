@@ -1,26 +1,33 @@
 package model;
 
 public class Bank {
-    private String cardno;
+    private String username;
+    private String accno;
     private String amount;
     private String type;
     private String date;
 
-    public Bank(String cardno, String amount, String type, String date){
-        this.cardno=cardno;
+    public Bank(String username,String accno, String amount, String type, String date){
+        this.username=username;
+        this.accno=accno;
         this.amount=amount;
         this.type=type;
         this.date=date;
     }
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public Bank() {
     }
-
-    public String getCardno() {
-        return cardno;
+    public String getAccno() {
+        return accno;
     }
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
+    public void setAccno(String accno) {
+        this.accno = accno;
     }
     public String getAmount() {
         return amount;

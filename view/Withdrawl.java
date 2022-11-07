@@ -2,24 +2,18 @@ package view;
 
 import javax.swing.*;
 
-// import controller.BankController;
-// import model.Bank;
-
 import java.awt.*;
 import java.awt.event.*;
-// import java.util.Date;
 
 public class Withdrawl extends JFrame implements ActionListener {
 
     JLabel lbltitle, lblimage;
     JTextField txtamount;
     JButton btnwithdraw, btnback;
-    static String cardno;
-    static String pin;
+    static String username;
 
-    Withdrawl(String cardno, String pin) {
-        Withdrawl.pin = pin;
-        Withdrawl.cardno = cardno;
+    Withdrawl(String username) {
+        Withdrawl.username = username;
 
         setSize(1360, 906);
         setLocation(350, 95);
@@ -67,7 +61,7 @@ public class Withdrawl extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Withdrawl(cardno, pin);
+        new Withdrawl(username);
     }
 
     @Override
@@ -80,12 +74,13 @@ public class Withdrawl extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter the Amount to you want to Withdraw");
             } else {
 
-                new PinVerification(cardno, pin, amount, "withdraw");
+                new PinVerification(username, amount, "withdraw");
+                this.dispose();
 
             }
         } else if (ae.getSource() == btnback) {
             setVisible(false);
-            new Transaction("", "");
+            new Transaction("");
         }
 
     }

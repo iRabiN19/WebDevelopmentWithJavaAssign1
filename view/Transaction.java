@@ -7,12 +7,10 @@ import java.awt.event.*;
 public class Transaction extends JFrame implements ActionListener {
     JLabel lbltransaction, lblimage;
     JButton btndeposit, btnwithdraw, b3, btnstatement, btnpin, btnenquiry, btnexit;
-    static String cardno;
-    static String pin;
+    static String username;
 
-    Transaction(String cardno, String pin) {
-        Transaction.cardno = cardno;
-        Transaction.pin = pin;
+    Transaction(String username) {
+        Transaction.username = username;
 
         setSize(1360, 906);
         setLocation(350, 95);
@@ -83,30 +81,32 @@ public class Transaction extends JFrame implements ActionListener {
         setLayout(null);
         setUndecorated(true);
         setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btnexit) {
-            setVisible(false);
-            new Continue().setVisible(true);
-        } else if (ae.getSource() == btndeposit) {
-            setVisible(false);
-            new DepositView(cardno, pin).setVisible(true);
-        } else if (ae.getSource() == btnwithdraw) {
-            setVisible(false);
-            new Withdrawl(cardno, pin).setVisible(true);
-        } else if (ae.getSource() == btnpin) {
-            new PinVerification(cardno, pin, "", "pin");
+            new Continue(username);
             this.dispose();
-        }  else if (ae.getSource() == btnenquiry) {
-            new BalanceEnquiry(cardno, pin);
+        } else if (ae.getSource() == btndeposit) {
+            new DepositView(username);
+            this.dispose();
+        } else if (ae.getSource() == btnwithdraw) {
+            new Withdrawl(username);
+            this.dispose();
+        } else if (ae.getSource() == btnpin) {
+            new PinVerification(username, "", "pin");
+            this.dispose();
+        } else if (ae.getSource() == btnenquiry) {
+            new BalanceEnquiry(username);
+            this.dispose();
+        } else if (ae.getSource() == btnstatement) {
+            new MiniStatement(username);
             this.dispose();
         }
     }
 
     public static void main(String[] args) {
-        new Transaction(cardno, pin);
+        new Transaction(username);
     }
 }

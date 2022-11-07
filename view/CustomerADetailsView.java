@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import javax.swing.*;
 
-import controller.SignUp2Controller;
-import model.SignUp2;
+import controller.CustomerAController;
+import model.CustomerADetails;
 
-public class SignUp2View extends JFrame implements ActionListener {
+public class CustomerADetailsView extends JFrame implements ActionListener {
 
     JLabel lbladdDetails, lblreligion, lblphone, lblincome, lbledu, lblocc,
             lblpan, lblseniorc, lblextacc, lblqlc, lblform, lblcitizen;
@@ -18,7 +18,7 @@ public class SignUp2View extends JFrame implements ActionListener {
     JComboBox<String> combReligion, combIncome, combEdu, combOcc;
     static int formno;
 
-    SignUp2View(int formno2) {
+    CustomerADetailsView(int formno2) {
 
         // ImageIcon i1 = new
         // ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/logo.jpg"));
@@ -28,9 +28,12 @@ public class SignUp2View extends JFrame implements ActionListener {
         // l14.setBounds(150, 0, 100, 100);
         // add(l14);
 
-        SignUp2View.formno = formno2;
+        CustomerADetailsView.formno = formno2;
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 2");
-        getContentPane().setBackground(Color.WHITE);
+
+        Color color = new Color(242, 202, 133);
+        getContentPane().setBackground(color);
+
         setLayout(null);
 
         lbladdDetails = new JLabel("Page 2: Additonal Details");
@@ -98,22 +101,22 @@ public class SignUp2View extends JFrame implements ActionListener {
 
         rbtnSCyes = new JRadioButton("Yes");
         rbtnSCyes.setFont(new Font("Raleway", Font.BOLD, 14));
-        rbtnSCyes.setBackground(Color.WHITE);
+        rbtnSCyes.setBackground(color);
         rbtnSCyes.setBounds(350, 490, 100, 30);
 
         rbtnSCno = new JRadioButton("No");
         rbtnSCno.setFont(new Font("Raleway", Font.BOLD, 14));
-        rbtnSCno.setBackground(Color.WHITE);
+        rbtnSCno.setBackground(color);
         rbtnSCno.setBounds(460, 490, 100, 30);
 
         rbtnEAyes = new JRadioButton("Yes");
         rbtnEAyes.setFont(new Font("Raleway", Font.BOLD, 14));
-        rbtnEAyes.setBackground(Color.WHITE);
+        rbtnEAyes.setBackground(color);
         rbtnEAyes.setBounds(350, 540, 100, 30);
 
         rbtnEAno = new JRadioButton("No");
         rbtnEAno.setFont(new Font("Raleway", Font.BOLD, 14));
-        rbtnEAno.setBackground(Color.WHITE);
+        rbtnEAno.setBackground(color);
         rbtnEAno.setBounds(460, 540, 100, 30);
 
         String religion[] = { "Hindu", "Muslim", "Buddhism", "Christian", "Other" };
@@ -173,7 +176,7 @@ public class SignUp2View extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new SignUp2View(formno);
+        new CustomerADetailsView(formno);
     }
 
     @Override
@@ -201,19 +204,19 @@ public class SignUp2View extends JFrame implements ActionListener {
         }
 
         try {
-            if (txtpan.getText().equals("")) {
+            if (txtcitizen.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Fill all the required fields");
             } else {
-                SignUp2 signUp2 = new SignUp2(formno, religion, phone, income, qualification, occupation, pan,
+                CustomerADetails signUp2 = new CustomerADetails(formno, religion, phone, income, qualification, occupation, pan,
                         citizenship,seniorc, existing);
 
-                SignUp2Controller sign2cont = new SignUp2Controller();
+                CustomerAController sign2cont = new CustomerAController();
                 int insert = sign2cont.registerCustomer(signUp2);
 
                 if (insert > 0) {
                     System.out.println("Customer added successfully");
 
-                    new SignUp3View(formno).setVisible(true);
+                    new AccountDetailsView(formno).setVisible(true);
                     setVisible(false);
                 } else {
                     System.out.println("Error registering customer");

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class SignUp {
+public class CustomerPDetails {
     private int formno;
     private String name; 
     private String father_name; 
@@ -15,7 +15,7 @@ public class SignUp {
     private String state;
 
 
-    public SignUp(int formno, String name, String father_name,
+    public CustomerPDetails(int formno, String name, String father_name,
         Date dob, String gender, String email,
         String marital_status, String address, 
         String city, String state){
