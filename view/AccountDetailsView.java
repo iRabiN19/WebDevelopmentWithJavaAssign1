@@ -149,6 +149,7 @@ public class AccountDetailsView extends JFrame implements ActionListener {
         btncancel.setFont(new Font("Monospaced", Font.BOLD, 20));
         btncancel.setBounds(450, 715, 150, 30);
 
+
         add(lblform);
         add(lbltype);
         add(rbtnsav);

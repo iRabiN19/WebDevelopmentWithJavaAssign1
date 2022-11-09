@@ -77,6 +77,32 @@ public class AccountDetailsController {
         query = "update accountdetails set pin = '"+rpin+"' where pin = '"+pin+"' ";
 
         db = new DBConnection();
-        return db.insert(query);
+        return db.update(query);
     }
+
+    public int edituser(String username,String user){
+
+        String query,query1;
+
+        query = "update accountdetails set username = '"+user+"' where username = '"+username+"' ";
+        query1 = "update bank set username = '"+user+"' where username = '"+username+"' ";
+
+
+        db = new DBConnection();
+        db.update(query1);
+        return db.update(query);
+    }
+
+    public int edituserpw(String username,String user,String rpw){
+
+        String query;
+
+        query = "update accountdetails set username = '"+user+"', password='"+rpw+"' where username = '"+username+"' ";
+
+
+        db = new DBConnection();
+        return db.update(query);
+    }
+
+    
 }

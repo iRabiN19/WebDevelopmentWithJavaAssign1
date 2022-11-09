@@ -2,13 +2,12 @@ package view;
 
 import javax.swing.*;
 
+
 import controller.AccountDetailsController;
-// import database.DBConnection;
 import model.AccountDetails;
 
 import java.awt.*;
 import java.awt.event.*;
-// import java.sql.ResultSet;
 
 public class LoginView extends JFrame implements ActionListener {
 
@@ -69,6 +68,8 @@ public class LoginView extends JFrame implements ActionListener {
         btnreg.addActionListener(this);
         btnclear.addActionListener(this);
 
+       
+
         add(label);
         add(lblwlc);
         add(lblusername);
@@ -98,8 +99,8 @@ public class LoginView extends JFrame implements ActionListener {
             txtusername.setText("");
             txtpw.setText("");
         } else if (e.getSource() == btnreg) {
-            setVisible(false);
-            new CustomerPDetailsView().setVisible(true);
+            new CustomerPDetailsView("","");
+            this.dispose();
 
         } else if (e.getSource() == btnlogin) {
             String username = txtusername.getText();

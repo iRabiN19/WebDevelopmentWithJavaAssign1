@@ -2,10 +2,12 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.awt.*;
 import javax.swing.*;
 
 import controller.CustomerAController;
+import database.DBConnection;
 import model.CustomerADetails;
 
 public class CustomerADetailsView extends JFrame implements ActionListener {
@@ -17,18 +19,20 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
     JTextField txtpan, txtphone, txtcitizen;
     JComboBox<String> combReligion, combIncome, combEdu, combOcc;
     static int formno;
+    static String mode;
+    static String form;
 
-    CustomerADetailsView(int formno2) {
 
-        // ImageIcon i1 = new
-        // ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/logo.jpg"));
-        // Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        // ImageIcon i3 = new ImageIcon(i2);
-        // JLabel l14 = new JLabel(i3);
-        // l14.setBounds(150, 0, 100, 100);
-        // add(l14);
+    CustomerADetailsView(int formno2, String mode,String form) {
+
+       
 
         CustomerADetailsView.formno = formno2;
+        CustomerADetailsView.mode = mode;
+        CustomerADetailsView.form = form;
+
+
+
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 2");
 
         Color color = new Color(242, 202, 133);
@@ -143,6 +147,44 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
         combOcc.setFont(new Font("Raleway", Font.BOLD, 14));
         combOcc.setBounds(350, 340, 320, 30);
 
+        if(mode.equals("update")){
+            try{
+                DBConnection db = new DBConnection();
+                String query="select * from customerAdetails where formno = '" + form + "';";
+                ResultSet rs;
+            rs = db.select(query);
+
+                while(rs.next()){
+                    combReligion.setSelectedItem(rs.getString("religion"));
+                    txtphone.setText(rs.getString("phone"));
+                    combIncome.setSelectedItem(rs.getString("income"));
+                    combEdu.setSelectedItem(rs.getString("qualification"));
+                    combOcc.setSelectedItem(rs.getString("occupation"));
+                    if(!rs.getString("pan").equals(null)){
+                        txtpan.setText(rs.getString("pan"));
+                    }
+                    txtcitizen.setText(rs.getString("citizenship"));
+
+                    if(rs.getString("seniorc").equals("Yes")){
+                        rbtnSCyes.setSelected(true);
+                    } else if(rs.getString("seniorc").equals("No")){
+                        rbtnSCno.setSelected(true);
+                    }
+
+                    if(rs.getString("existing").equals("Yes")){
+                        rbtnEAyes.setSelected(true);
+                    } else if(rs.getString("existing").equals("No")){
+                        rbtnEAno.setSelected(true);
+                    }
+
+
+                }
+             
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+
         add(lblform);
         add(lbladdDetails);
         add(lblreligion);
@@ -176,7 +218,7 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new CustomerADetailsView(formno);
+        new CustomerADetailsView(formno,mode,form);
     }
 
     @Override

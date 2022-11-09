@@ -31,6 +31,21 @@ public class CustomerPDetails {
             this.state=state;
     }
 
+    public CustomerPDetails(String name, String father_name,
+    Date dob, String gender, String email,
+    String marital_status, String address, 
+    String city, String state){
+        this.name=name;
+        this.father_name=father_name;
+        this.dob=dob;
+        this.gender=gender;
+        this.email=email;
+        this.marital_status=marital_status;
+        this.address=address;
+        this.city=city;
+        this.state=state;
+}
+
     public int getFormno() {
         return formno;
     }

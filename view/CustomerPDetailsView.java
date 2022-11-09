@@ -6,9 +6,11 @@ import java.util.*;
 import com.toedter.calendar.*;
 
 import controller.CustomerPController;
+import database.DBConnection;
 import model.CustomerPDetails;
 import java.awt.event.*;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,10 +26,16 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
     JButton btnnext;
     Random ran = new Random();
     int num = Math.abs(ran.nextInt(10000));
+    static String mode;
+    static String form;
 
     Font ftitle = new Font("Marker Felt", Font.BOLD, 38);
 
-    CustomerPDetailsView() {
+    CustomerPDetailsView(String mode,String form) {
+        CustomerPDetailsView.mode=mode;
+        CustomerPDetailsView.form=form;
+
+        
         setSize(850, 800);
         setLayout(null);
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 1");
@@ -148,6 +156,47 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
         btnnext.setBounds(620, 660, 100, 30);
         btnnext.addActionListener(this);
 
+        if(mode.equals("update")){
+            try{
+                DBConnection db = new DBConnection();
+                String query="select * from customerPdetails where formno = '" + form + "';";
+                ResultSet rs;
+            rs = db.select(query);
+
+                while(rs.next()){
+                  txtname.setText(rs.getString("name"));
+                  txtfathersname.setText(rs.getString("father_name"));
+                dateChooser.setDate(rs.getDate("dob"));
+
+                if(rs.getString("gender").equals("Male")){
+                    btnmale.setSelected(true);
+                } else if(rs.getString("gender").equals("Female")){
+                    btnfemale.setSelected(true);
+                }else if(rs.getString("gender").equals("Other")){
+                    btngother.setSelected(true);
+                }
+
+                txtemail.setText(rs.getString("email"));
+
+                if(rs.getString("marital_status").equals("Married")){
+                    btnmarried.setSelected(true);
+                } else if(rs.getString("marital_status").equals("Unmarried")){
+                    btnunmarried.setSelected(true);
+                }else if(rs.getString("marital_status").equals("Other")){
+                    btnmsother.setSelected(true);
+                }
+
+                txtaddress.setText(rs.getString("address"));
+                txtcity.setText(rs.getString("city"));
+                txtstate.setText(rs.getString("state"));
+
+                }
+             
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+
         add(lbltitle);
         add(lblsubtitle);
         add(lbladdress);
@@ -183,7 +232,7 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-        new CustomerPDetailsView();
+        new CustomerPDetailsView(mode,form);
     }
 
     @Override
@@ -246,11 +295,23 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
                 } else if (state.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please fill your state.");
                 } else {
-                    CustomerPDetails signUp = new CustomerPDetails(formno, name, father_name, dob, gender, email, marital_status,
+                    
+
+                if(mode.equals("update")){
+                    CustomerPDetails customerPDetails = new CustomerPDetails(name, father_name, dob, gender, email, marital_status,
                             address, city, state);
-    
-                    CustomerPController singcont = new CustomerPController();
-                    int insert = singcont.registerCustomer(signUp);
+                            CustomerPController controller = new CustomerPController();
+                   int update=controller.updatedetails(customerPDetails,form);
+                    if (update > 0) {
+                        System.out.println("Details updated successfully");
+                    } else {
+                        System.out.println("Error updating details.");
+                    }
+                } 
+                CustomerPDetails signUp = new CustomerPDetails(formno, name, father_name, dob, gender, email, marital_status,
+                            address, city, state);
+                            CustomerPController controller = new CustomerPController();
+                    int insert = controller.registerCustomer(signUp);
     
                     if (insert > 0) {
                         System.out.println("Customer added successfully");
@@ -258,9 +319,9 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
                         System.out.println("Error registering customer");
                     }
 
-                    setVisible(false);
 
-                    new CustomerADetailsView(formno).setVisible(true);
+                    new CustomerADetailsView(formno,mode,form);
+                    this.dispose();
                 }
     
             } catch (Exception e) {

@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class Transaction extends JFrame implements ActionListener {
     JLabel lbltransaction, lblimage;
-    JButton btndeposit, btnwithdraw, b3, btnstatement, btnpin, btnenquiry, btnexit;
+    JButton btndeposit, btnwithdraw, btnstatement, btnedit, btnenquiry, btnexit;
     static String username;
 
     Transaction(String username) {
@@ -28,37 +28,37 @@ public class Transaction extends JFrame implements ActionListener {
         lbltransaction.setBounds(425, 150, 700, 35);
 
         btndeposit = new JButton("DEPOSIT");
-        btndeposit.setBounds(360, 250, 180, 50);
+        btndeposit.setBounds(360, 250, 200, 50);
         btndeposit.setFont(new Font("Monospaced", Font.BOLD, 18));
         btndeposit.setBackground(Color.BLACK);
         btndeposit.setForeground(Color.CYAN);
 
         btnwithdraw = new JButton("CASH WITHDRAWL");
-        btnwithdraw.setBounds(830, 250, 180, 50);
+        btnwithdraw.setBounds(810, 250, 200, 50);
         btnwithdraw.setFont(new Font("Monospaced", Font.BOLD, 17));
         btnwithdraw.setBackground(Color.BLACK);
         btnwithdraw.setForeground(Color.CYAN);
 
         btnstatement = new JButton("MINI STATEMENT");
-        btnstatement.setBounds(360, 365, 180, 50);
+        btnstatement.setBounds(360, 365, 200, 50);
         btnstatement.setFont(new Font("Monospaced", Font.BOLD, 17));
         btnstatement.setBackground(Color.BLACK);
         btnstatement.setForeground(Color.CYAN);
 
-        btnpin = new JButton("PIN CHANGE");
-        btnpin.setBounds(830, 365, 180, 50);
-        btnpin.setFont(new Font("Monospaced", Font.BOLD, 17));
-        btnpin.setBackground(Color.BLACK);
-        btnpin.setForeground(Color.CYAN);
+        btnedit = new JButton("Edit information");
+        btnedit.setBounds(810, 365, 200, 50);
+        btnedit.setFont(new Font("Monospaced", Font.BOLD, 17));
+        btnedit.setBackground(Color.BLACK);
+        btnedit.setForeground(Color.CYAN);
 
         btnenquiry = new JButton("BALANCE ENQUIRY");
-        btnenquiry.setBounds(360, 475, 180, 50);
+        btnenquiry.setBounds(360, 475, 200, 50);
         btnenquiry.setFont(new Font("Monospaced", Font.BOLD, 15));
         btnenquiry.setBackground(Color.BLACK);
         btnenquiry.setForeground(Color.CYAN);
 
         btnexit = new JButton("EXIT");
-        btnexit.setBounds(830, 475, 180, 50);
+        btnexit.setBounds(810, 475, 200, 50);
         btnexit.setFont(new Font("Monospaced", Font.BOLD, 20));
         btnexit.setBackground(Color.BLACK);
         btnexit.setForeground(Color.CYAN);
@@ -67,14 +67,14 @@ public class Transaction extends JFrame implements ActionListener {
         lblimage.add(btndeposit);
         lblimage.add(btnwithdraw);
         lblimage.add(btnstatement);
-        lblimage.add(btnpin);
+        lblimage.add(btnedit);
         lblimage.add(btnenquiry);
         lblimage.add(btnexit);
 
         btndeposit.addActionListener(this);
         btnwithdraw.addActionListener(this);
         btnstatement.addActionListener(this);
-        btnpin.addActionListener(this);
+        btnedit.addActionListener(this);
         btnenquiry.addActionListener(this);
         btnexit.addActionListener(this);
 
@@ -94,8 +94,8 @@ public class Transaction extends JFrame implements ActionListener {
         } else if (ae.getSource() == btnwithdraw) {
             new Withdrawl(username);
             this.dispose();
-        } else if (ae.getSource() == btnpin) {
-            new PinVerification(username, "", "pin");
+        } else if (ae.getSource() == btnedit) {
+            new PinVerification(username, "", "edit");
             this.dispose();
         } else if (ae.getSource() == btnenquiry) {
             new BalanceEnquiry(username);

@@ -27,6 +27,20 @@ public class CustomerADetails {
         this.existing = existing;
     }
 
+    public CustomerADetails(String religion, String phone, String income,
+            String qualification, String occupation, String pan, String citizenship,
+            String seniorc, String existing) {
+        this.religion = religion;
+        this.phone = phone;
+        this.income = income;
+        this.qualification = qualification;
+        this.occupation = occupation;
+        this.pan = pan;
+        this.citizenship = citizenship;
+        this.seniorc = seniorc;
+        this.existing = existing;
+    }
+
     public int getFormno() {
         return formno;
     }

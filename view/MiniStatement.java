@@ -45,7 +45,9 @@ public class MiniStatement extends JFrame implements ActionListener{
             }
             lblcard.setFont(new Font("Raleway" , Font.BOLD,15));
         lblcard.setBounds(20, 120, 300, 20);
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(e);
+        }
 
         
 

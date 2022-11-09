@@ -41,7 +41,7 @@ public class PinChange extends JFrame implements ActionListener {
         txtnpin.setBounds(680, 210, 200, 30);
         txtnpin.setFont(new Font("Raleway", Font.BOLD, 26));
 
-        lblrpin = new JLabel("Re-write pin:");
+        lblrpin = new JLabel("Confirm pin:");
         lblrpin.setFont(new Font("Raleway", Font.BOLD, 26));
         lblrpin.setBounds(425, 270, 200, 30);
 

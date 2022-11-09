@@ -75,7 +75,6 @@ public class PinVerification extends JFrame implements ActionListener {
 
             if (customer != null) {
                 if (mode == "withdraw") {
-                    System.out.println(mode);
                     Bank deposit = new Bank(username, "", amount, "Withdraw", date);
                     BankController depositcont = new BankController();
                     double balance = depositcont.transaction(username, amount);
@@ -86,8 +85,8 @@ public class PinVerification extends JFrame implements ActionListener {
                         this.dispose();
 
                     }
-                } else if (mode == "pin") {
-                    new PinChange(username,pin);
+                } else if (mode == "edit") {
+                    new EditInfo(username,pin);
                     this.dispose();
                 }
 
