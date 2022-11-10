@@ -41,7 +41,7 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
         getContentPane().setBackground(color);
 
         lbltitle = new JLabel("Application Form No. " + num);
-        lbltitle.setFont(ftitle);
+        lbltitle.setFont(new Font("Marker Felt", Font.BOLD, 38));
         lbltitle.setBounds(140, 20, 600, 40);
 
         lblsubtitle = new JLabel("Page 1:Personal Details");

@@ -203,7 +203,13 @@ public class AccountDetailsView extends JFrame implements ActionListener {
 
             Random random = new Random();
             int acc1 = Math.abs(random.nextInt(10000));
+            if(acc1<1000){
+                acc1+=1200;
+            }
             int acc2 = Math.abs(random.nextInt(10000));
+            if(acc2<1000){
+                acc2+=1895;
+            }
             int pin = Math.abs(random.nextInt(10000));
 
             String accno = "74599635" + acc1 + acc2;
