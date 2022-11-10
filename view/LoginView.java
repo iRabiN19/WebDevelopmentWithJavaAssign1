@@ -1,11 +1,8 @@
 package view;
 
 import javax.swing.*;
-
-
 import controller.AccountDetailsController;
 import model.AccountDetails;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -68,8 +65,6 @@ public class LoginView extends JFrame implements ActionListener {
         btnreg.addActionListener(this);
         btnclear.addActionListener(this);
 
-       
-
         add(label);
         add(lblwlc);
         add(lblusername);
@@ -99,7 +94,7 @@ public class LoginView extends JFrame implements ActionListener {
             txtusername.setText("");
             txtpw.setText("");
         } else if (e.getSource() == btnreg) {
-            new CustomerPDetailsView("","");
+            new CustomerPDetailsView("", "");
             this.dispose();
 
         } else if (e.getSource() == btnlogin) {
@@ -112,13 +107,9 @@ public class LoginView extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please fill your password.");
 
             } else {
-
                 AccountDetailsController controller = new AccountDetailsController();
                 AccountDetails customer = controller.loginCustomer(username, password);
                 if (customer != null) {
-
-                  
-
                     new Transaction(username);
                     this.dispose();
                 } else {
@@ -126,7 +117,5 @@ public class LoginView extends JFrame implements ActionListener {
                 }
             }
         }
-
     }
-
 }

@@ -4,12 +4,12 @@ public class AccountDetails {
     private int formno;
     private String username;
     private String password;
-    private String accountType;
+    private int accountType;
     private String accno;
     private String Pin;
     private String services;
 
-    public AccountDetails(int formno,String username, String password,String accountType,String accno, String Pin, String services){
+    public AccountDetails(int formno,String username, String password,int accountType,String accno, String Pin, String services){
         this.formno=formno;
         this.username=username;
         this.password=password;
@@ -47,10 +47,10 @@ public class AccountDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getAccountType() {
+    public int getAccountType() {
         return accountType;
     }
-    public void setAccountType(String accountType) {
+    public void setAccountType(int accountType) {
         this.accountType = accountType;
     }
     public String getAccno() {

@@ -36,7 +36,7 @@ public class AccountDetailsController {
                 customer.setFormno(rs.getInt("formno"));
                 customer.setUsername(rs.getString("username"));
                 customer.setPassword(rs.getString("password"));
-                customer.setAccountType(rs.getString("accountType"));
+                customer.setAccountType(rs.getInt("accountType"));
                 customer.setAccno(rs.getString("accno"));
                 customer.setPin(rs.getString("Pin"));
                 customer.setServices(rs.getString("services"));
@@ -58,7 +58,7 @@ public class AccountDetailsController {
         try {
             while (rs.next()) {
                 customer = new AccountDetails();
-                customer.setAccountType(rs.getString("accountType"));
+                customer.setAccountType(rs.getInt("accountType"));
                 customer.setAccno(rs.getString("accno"));
                 customer.setPin(rs.getString("Pin"));
                 customer.setServices(rs.getString("services"));
@@ -74,7 +74,7 @@ public class AccountDetailsController {
     public int changepin(String pin, String rpin) {
         String query;
 
-        query = "update accountdetails set pin = '"+rpin+"' where pin = '"+pin+"' ";
+        query = "update accountdetails set pin = '"+rpin+"' where pin = '"+pin+"'; ";
 
         db = new DBConnection();
         return db.update(query);

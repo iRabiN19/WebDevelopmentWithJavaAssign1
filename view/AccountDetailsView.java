@@ -194,11 +194,11 @@ public class AccountDetailsView extends JFrame implements ActionListener {
 
             String username = txtusername.getText();
             String password = String.valueOf(txtpassword.getPassword());
-            String accountType = null;
+            int accountType = 0;
             if (rbtnsav.isSelected()) {
-                accountType = "Saving Account";
+                accountType = 1;
             } else if (rbtnsalary.isSelected()) {
-                accountType = "Salary Account";
+                accountType = 2;
             }
 
             Random random = new Random();
@@ -230,7 +230,7 @@ public class AccountDetailsView extends JFrame implements ActionListener {
             }
 
             try {
-                if (accountType.equals("")) {
+                if (accountType==0) {
                     JOptionPane.showMessageDialog(null, "Fill all the required fields");
                 } else {
                     AccountDetails signUp3 = new AccountDetails(formno, username, password, accountType, accno, Pin,
@@ -258,8 +258,9 @@ public class AccountDetailsView extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
         } else if (ae.getSource() == btncancel) {
-            setVisible(false);
-            new LoginView().setVisible(true);
+            new LoginView();
+            this.dispose();
+
         }
     }
 }

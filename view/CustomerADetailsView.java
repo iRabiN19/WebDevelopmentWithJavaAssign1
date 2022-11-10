@@ -258,8 +258,8 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
                 if (insert > 0) {
                     System.out.println("Customer added successfully");
 
-                    new AccountDetailsView(formno).setVisible(true);
-                    setVisible(false);
+                    new AccountDetailsView(formno);
+                    this.dispose();
                 } else {
                     System.out.println("Error registering customer");
                 }

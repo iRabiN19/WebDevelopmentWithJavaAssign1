@@ -79,8 +79,8 @@ public class Withdrawl extends JFrame implements ActionListener {
 
             }
         } else if (ae.getSource() == btnback) {
-            setVisible(false);
             new Transaction("");
+            this.dispose();
         }
 
     }
