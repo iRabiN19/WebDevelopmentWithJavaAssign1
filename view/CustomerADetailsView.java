@@ -148,6 +148,11 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
         combOcc.setBounds(350, 340, 320, 30);
 
         if(mode.equals("update")){
+            setTitle("Update Info");
+            lbladdDetails.setText("");
+            lblform.setText("");
+            btnnext.setText("Update");
+            btnnext.setSize(140, 30);
             try{
                 DBConnection db = new DBConnection();
                 String query="select * from customerAdetails where formno = '" + form + "';";
@@ -248,7 +253,22 @@ public class CustomerADetailsView extends JFrame implements ActionListener {
         try {
             if (txtcitizen.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Fill all the required fields");
-            } else {
+            } else if (mode.equals("update")) {
+                CustomerADetails customerPDetails = new CustomerADetails(religion, phone, income, qualification, occupation, pan,
+                citizenship,seniorc, existing);
+                CustomerAController controller = new CustomerAController();
+                int update = controller.updatedetails(customerPDetails, form);
+                if (update > 0) {
+                    System.out.println("Details updated successfully");
+                    JOptionPane.showMessageDialog(null, "Details updated successfully");
+                    JOptionPane.showMessageDialog(null, "You are required to login again.");
+
+                    new LoginView();
+                } else {
+                    System.out.println("Error updating details.");
+                }
+            }
+            else {
                 CustomerADetails signUp2 = new CustomerADetails(formno, religion, phone, income, qualification, occupation, pan,
                         citizenship,seniorc, existing);
 

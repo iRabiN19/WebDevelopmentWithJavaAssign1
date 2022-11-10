@@ -90,6 +90,8 @@ public class PinVerification extends JFrame implements ActionListener {
                     this.dispose();
                 }
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect Pin.");
             }
 
            

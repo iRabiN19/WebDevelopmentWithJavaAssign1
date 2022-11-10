@@ -75,7 +75,6 @@ public class Withdrawl extends JFrame implements ActionListener {
             } else {
 
                 new PinVerification(username, amount, "withdraw");
-                this.dispose();
 
             }
         } else if (ae.getSource() == btnback) {

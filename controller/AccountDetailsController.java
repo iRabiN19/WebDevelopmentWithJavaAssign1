@@ -10,11 +10,11 @@ public class AccountDetailsController {
 
     public int registerCustomer(AccountDetails accountDetails) {
         String query;
-        query = "insert into accountdetails(formno,username,password,accountType,accno,Pin,services) values('" +
+        query = "insert into accountdetails(formno,username,password,accountTypeID,accno,Pin,services) values('" +
                 accountDetails.getFormno() + "','" +
                 accountDetails.getUsername() + "','" +
                 accountDetails.getPassword() + "','" +
-                accountDetails.getAccountType() + "','" +
+                accountDetails.getAccountTypeId() + "','" +
                 accountDetails.getAccno() + "','" +
                 accountDetails.getPin() + "','" +
                 accountDetails.getServices() + "');";
@@ -36,7 +36,7 @@ public class AccountDetailsController {
                 customer.setFormno(rs.getInt("formno"));
                 customer.setUsername(rs.getString("username"));
                 customer.setPassword(rs.getString("password"));
-                customer.setAccountType(rs.getInt("accountType"));
+                customer.setAccountTypeId(rs.getInt("accountTypeId"));
                 customer.setAccno(rs.getString("accno"));
                 customer.setPin(rs.getString("Pin"));
                 customer.setServices(rs.getString("services"));
@@ -58,7 +58,7 @@ public class AccountDetailsController {
         try {
             while (rs.next()) {
                 customer = new AccountDetails();
-                customer.setAccountType(rs.getInt("accountType"));
+                customer.setAccountTypeId(rs.getInt("accountTypeId"));
                 customer.setAccno(rs.getString("accno"));
                 customer.setPin(rs.getString("Pin"));
                 customer.setServices(rs.getString("services"));

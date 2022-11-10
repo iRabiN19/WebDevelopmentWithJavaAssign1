@@ -98,7 +98,7 @@ public class EditInfo extends JFrame implements ActionListener {
             new CustomerPDetailsView("update",form);
             this.dispose();
         } else if (ae.getSource() == btnpin) {
-            new BalanceEnquiry(username);
+            new PinChange(username,pin);
             this.dispose();
         } else if (ae.getSource() == btnuspw) {
             new UserPW(username);

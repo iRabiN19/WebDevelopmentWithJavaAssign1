@@ -145,6 +145,8 @@ public class CustomerPDetailsView extends JFrame implements ActionListener {
         btnnext.addActionListener(this);
 
         if (mode.equals("update")) {
+            setTitle("Update Info");
+            lbltitle.setText("");
             try {
                 DBConnection db = new DBConnection();
                 String query = "select * from customerPdetails where formno = '" + form + "';";
